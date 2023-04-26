@@ -12,7 +12,7 @@ const Booking = ({booking, removeBooking}) => {
         <>
            <div>{booking.name}</div>
            <div>{booking.email}</div>
-           <div>{booking.checked_in}</div>
+           <div>{booking.checked_in ? "Checked in" : "Checked out"}</div>
            <button onClick={handleDelete}>🗑 </button>
         </>
      );

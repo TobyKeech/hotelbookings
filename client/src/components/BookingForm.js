@@ -7,8 +7,7 @@ const BookingForm = ({addBooking}) => {
         {
             name : "",
             email:"",
-            checked_in: "true", 
-            checked_out: "false"
+            checked_in: false
         })
 
     const onChange = (event) => {
@@ -20,15 +19,17 @@ const BookingForm = ({addBooking}) => {
 
     const onRadioChange = (e) => {
         const veryNewFormData = { ...formData };
+        console.log('e.target.value', e.target.value)
         let value;
         if (e.target.value === "false") {
           value = false;
         } else if (e.target.value === "true") {
           value = true;
         }
-        veryNewFormData[e.target.name] = value;
-        console.log(formData)
-        setFormData(veryNewFormData);
+        veryNewFormData.checked_in = value;
+        setFormData(veryNewFormData, () => {
+            console.log(formData);
+        });
       };
 
     const onSubmit = (event) =>{
@@ -40,8 +41,7 @@ const BookingForm = ({addBooking}) => {
         setFormData({
             name: "",
             email: "",
-            checked_in: "true",
-            checked_out: "false"
+            checked_in: false
         });
     }
 
@@ -54,6 +54,7 @@ const BookingForm = ({addBooking}) => {
         <div>
         <label htmlFor="name">Name:</label>
         <input 
+        required
         onChange={onChange}
         type="text" 
         id="name"
@@ -65,6 +66,7 @@ const BookingForm = ({addBooking}) => {
         <div>
         <label htmlFor="email">Email:</label>
         <input 
+        required
         onChange={onChange}
         type="text" 
         id="email"
@@ -76,22 +78,22 @@ const BookingForm = ({addBooking}) => {
         <div>
         <label htmlFor="checked_in">Checked in:</label>
         <input 
-        onRadioChange={onRadioChange}
+        onChange={onRadioChange}
         type="radio" 
         id="checked_in"
         name="checked_status"
-        value={formData.checked_in}
+        value="true"
         />
         </div>
 
         <div>
         <label htmlFor="checked_out">Checked out:</label>
         <input 
-        onRadioChange={onRadioChange}
+        onChange={onRadioChange}
         type="radio" 
         id="checked_out"
         name="checked_status"
-        value={formData.checked_out}
+        value="false"
         />
         </div>
 

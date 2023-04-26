@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import BookingsList from "../components/BookingList"
 import { getBookings } from "../BookingService"
+import BookingForm from "../components/BookingForm";
 
 const BookingContainer = () => {
 
@@ -19,11 +20,17 @@ useEffect(() => {
     setHotelBookings(bookingsToRemain);
   }
 
+  const addBooking = (booking) => {
+    setHotelBookings([...hotelBookings, booking]);
+  }
+
     return (  
         <>
+            < BookingForm addBooking = {addBooking}/>
             < BookingsList bookings = {hotelBookings} removeBooking ={removeBooking}/>
         </>
     );
 }
  
 export default BookingContainer;
+
